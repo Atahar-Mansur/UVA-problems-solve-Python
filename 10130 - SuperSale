@@ -1,0 +1,40 @@
+T = input()
+T = int(T)
+
+while T > 0:
+
+    Ans = 0
+    DP = [0] * 31
+
+    N=input()
+    N=int(N)
+
+    while N > 0:
+
+        P, W = map(int, input().split())
+
+        J=30
+        while J >= W:
+
+            if DP[J] < DP[J-W]+P:
+                DP[J] = DP[J - W] + P
+
+            J -= 1
+
+        N-=1
+
+    G=input()
+    G=int(G)
+
+    while G > 0:
+
+        MW = input()
+        MW = int(MW)
+
+        Ans += DP[MW]
+
+        G-=1
+
+    print(Ans)
+
+    T -= 1
