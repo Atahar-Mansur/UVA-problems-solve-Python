@@ -1,0 +1,43 @@
+words = []
+lWords = []
+aWords = []
+
+while 1:
+
+    str = input()
+
+    if str == "#":
+        break
+
+    str = str.split()
+
+    for i in range(len(str)):
+        words.insert(0, str[i])
+
+words.sort()
+
+for i in words:
+    lWords.insert(0, i.lower())
+
+for i in range(len(lWords)):
+    for j in range(len(lWords)):
+        if(i != j):
+            if(lWords[i] == lWords[j]):
+                lWords[j] = '0'
+
+for i in lWords:
+    aWords.insert(0, ''.join(sorted(i)))
+
+for i in range(len(aWords)):
+    flag = False
+    for j in range(len(aWords)):
+        if(i != j):
+            if(aWords[i] == aWords[j]):
+                aWords[j] = '0'
+                flag = True
+    if(flag):
+        aWords[i] = '0'
+
+for i in range(len(aWords)):
+    if aWords[i] != '0':
+        print(words[i])
