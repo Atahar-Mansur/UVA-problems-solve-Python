@@ -1,0 +1,22 @@
+while 1:
+    try:
+        s1 = input()
+        s2 = input()
+        ...
+    except EOFError:
+        break;
+
+    result = ''
+    i = 0
+    while i < len(s1):
+        j = 0
+        while j < len(s2):
+            if s1[i] == s2[j]:
+                result = result + s2[j]
+                s2 = s2[0:j] + s2[j + 1:]
+                break
+            j = j + 1
+        i = i + 1
+
+    result = ''.join(sorted(result))
+    print(result)
