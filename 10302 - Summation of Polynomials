@@ -1,0 +1,167 @@
+def addition(x, y):
+    x = ''.join(reversed(str(x)))
+    y = ''.join(reversed(str(y)))
+    r = ''
+
+    if len(x) > len(y):
+        s = x
+        x = y
+        y = s
+
+    f = 0
+    i = 0
+    while i < len(x):
+        n1 = int(x[i])
+        n2 = int(y[i])
+        n = n1 + n2 + f
+        if n > 9:
+            f = 1
+            n = str(n)
+            r = r + n[1]
+        else:
+            f = 0
+            n = str(n)
+            r = r + n[0]
+        i = i + 1
+
+    i = len(x)
+    while i < len(y):
+        n2 = int(y[i])
+        n = n2 + f
+        if n > 9:
+            f = 1
+            n = str(n)
+            r = r + n[1]
+        else:
+            f = 0
+            n = str(n)
+            r = r + n[0]
+        i = i + 1
+
+    if f == 1:
+        r = r + str(1)
+
+    r = ''.join(reversed(str(r)))
+
+    while len(r) > 1 and r[0] == '0':
+        r = r[1:]
+
+    return r
+
+def subtraction(x, y):
+    #always y is greater then x
+    x = ''.join(reversed(str(x)))
+    y = ''.join(reversed(str(y)))
+    r = ''
+
+    f = 0
+    i = 0
+    while i < len(x):
+        n1 = int(x[i])
+        n2 = int(y[i])
+
+        if n1 + f <= n2:
+            n = n2 - n1 - f
+            n = str(n)
+            r = r + n
+            f = 0
+        else:
+            n = (n2 + 10) - n1 - f
+            n = str(n)
+            r = r + n
+            f = 1
+
+        i = i + 1
+
+    i = len(x)
+    while i < len(y):
+        n2 = int(y[i])
+        if f <= n2:
+            n = n2 - f
+            n = str(n)
+            r = r + n
+            f = 0
+        else:
+            n = (n2 + 10) - f
+            n = str(n)
+            r = r + n
+            f = 1
+        i = i + 1
+
+    r = ''.join(reversed(str(r)))
+
+    while len(r) > 1 and r[0] == '0':
+        r = r[1:]
+
+    return r
+
+def multiplication(x, y):
+    x = ''.join(reversed(str(x)))
+    y = ''.join(reversed(str(y)))
+    r = str(0)
+
+    i = 0
+    f = 0
+    while i < len(x):
+        sr = ''
+        j = 0
+        while j < len(y):
+            n = int(x[i]) * int(y[j]) + f
+            f = int(n / 10)
+            n = n % 10
+            sr = sr + str(n)
+            j = j + 1
+        if f != 0:
+            sr = sr + str(f)
+            f = 0
+
+        sr = ''.join(reversed(str(sr)))
+
+        k = 0
+        while k < i:
+            sr = sr + str(0)
+            k = k + 1
+
+        r = addition(r, sr)
+        i = i + 1
+
+    while len(r) > 1 and r[0] == '0':
+        r = r[1:]
+
+    return r
+
+def division(x, y):
+    #always y is small and divisor and integer
+    y = int(y)
+
+    i = 0
+    r = ''
+    sd = str(0)
+    while i < len(x):
+        while int(sd) < y and i < len(x):
+            sd = sd + x[i]
+            if int(sd) < y:
+                r = r + str(0)
+            i = i + 1
+        if int(sd) >= y:
+            r = r + str(int(int(sd) / y))
+            sd = str(int(sd) % y)
+
+    while len(r) > 1 and r[0] == '0':
+        r = r[1:]
+
+    return r
+
+while 1:
+    try:
+        n = input()
+        ...
+    except EOFError:
+        break;
+
+    result = multiplication(n, n)
+    result = multiplication(result, str(int(n) + 1))
+    result = multiplication(result, str(int(n) + 1))
+    result = division(result, str(4))
+
+    print(result)
