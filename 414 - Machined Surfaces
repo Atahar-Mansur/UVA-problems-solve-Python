@@ -1,0 +1,20 @@
+while 1:
+    N = input()
+    N = int(N)
+
+    if N == 0:
+        break
+
+    gap = []
+    r = 0
+    for i in range(N):
+        str = input()
+        str = str.split()
+        if len(str[0]) != 25:
+            gap.insert(0,25-len(str[0])-len(str[1]))
+        else:
+            gap.insert(0,0)
+    gap.sort()
+    for i in gap:
+        r = r + (i-gap[0])
+    print(r)
