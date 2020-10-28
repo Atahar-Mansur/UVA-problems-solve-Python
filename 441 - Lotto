@@ -1,0 +1,32 @@
+import itertools
+
+sf = 0
+
+while 1:
+
+    numbers = []
+    str = input()
+
+    if str == "0":
+        break
+
+    str = str.split()
+
+    f = 0
+    for i in range(len(str)):
+        if f == 1:
+            numbers.insert(0, int(str[i]))
+        else:
+            f = 1
+
+    numbers.sort()
+
+    if sf == 1:
+        print()
+    else:
+        sf = 1
+
+    for L in range(0, len(numbers) + 1):
+        for subset in itertools.combinations(numbers, L):
+            if(len(subset) == 6):
+                print(subset[0],subset[1],subset[2],subset[3],subset[4],subset[5])
